@@ -9,7 +9,7 @@ import { OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private section:string = "";
+  private section:string = "home";
   private search:string = "";
   private sectionOptions: Array<string> = ["home","opinion", 
     "world","national","politics","upshot","nyregion","business","technology","science","health","sports","arts","books","movies","theater","sundayreview","fashion","tmagazine","food","travel","magazine","realestate","automobiles","obituaries",  "insider"];
@@ -22,11 +22,11 @@ export class AppComponent {
   constructor(private _http:HttpClient){}
 
   ngOnInit(){
-    this.getData("home");
+    this.getData();
   }
 
-  getData(section){
-    this._http.get(this.url + section + this.resType + this.apiKey).subscribe(
+  getData(){
+    this._http.get(this.url + this.section + this.resType + this.apiKey).subscribe(
       (res) => {
         console.log(res)
         this.resData = res;

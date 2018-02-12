@@ -5,7 +5,7 @@
 
   <div>
     <h4>Please select a section</h4>
-      <select  [(ngModel)]="section" (ngModelChange)="lookup()" name="section">
+      <select  [(ngModel)]="section" (ngModelChange)="getData()" name="section">
         <option *ngFor="let option of sectionOptions"  value="{{option}}">{{option}}</option>
       </select>
       <h4>Search</h4>
@@ -28,7 +28,7 @@
     <div *ngFor="let data of searchData; let idx = index">
       <div *ngIf="idx < 10">
         <h3><a href="{{data.url}}">{{data.title}}</a></h3>
-        <h4>{{data.published_date | date: 'm/d/yyyy h:mm a z'}}</h4>
+        <h4>{{data.published_date | date: 'MM/dd/yyyy h:mm a Z'}}</h4>
         <p>{{data.abstract}}</p>
       </div>
   </div>
