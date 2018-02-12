@@ -1,21 +1,35 @@
 <!--The content below is only a placeholder and can be replaced.-->
-
+<div style="padding: 5px">
 <div>
-  <h1>News App</h1>
+<h1 class="jumbotron text-center">News App</h1>
 
   <div>
     <h4>Please select a section</h4>
-    <form (submit)="find()">
-      <select  [(ngModel)]="section" name="section">
+      <select  [(ngModel)]="section" (ngModelChange)="lookup()" name="section">
         <option *ngFor="let option of sectionOptions"  value="{{option}}">{{option}}</option>
       </select>
+      <h4>Search</h4>
       <input type="text" [(ngModel)]="search" name="search">
-      <input type="submit">
-    </form>
-    
+      <button (click)="searchResults()">Search</button>
   </div>
-    {{search}}
-    {{section}}
-
+</div>
+<div>
+  <div *ngIf="searchData.length === 0">
+    <h5>No match in this section</h5>
+  </div>
+  <div *ngIf="searchData.length > 0 && searchData.length <= 10">
+      <h5>{{searchData.length}} result(s) were found in this section</h5>
+  </div>
+  <div *ngIf="searchData.length > 10">
+    <h5>First 10 results displayed out of {{searchData.length}} in this section</h5>
+  </div>
 </div>
 
+    <div *ngFor="let data of searchData; let idx = index">
+      <div *ngIf="idx < 10">
+        <h3><a href="{{data.url}}">{{data.title}}</a></h3>
+        <h4>{{data.published_date | date: 'm/d/yyyy h:mm a z'}}</h4>
+        <p>{{data.abstract}}</p>
+      </div>
+  </div>
+</div>
